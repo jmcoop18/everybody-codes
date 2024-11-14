@@ -15,15 +15,17 @@ runic = f[0].replace('WORDS:', '').split(',')
 text = f[2:]
 t = 0
 
+for word in runic:
+    if word[::-1] not in runic:
+        runic.append(word[::-1])
+
 for line in text:
     found = ''
     for i in range(0, len(runic)):
         if runic[i] in line:
             found += (runic[i])
-        print(runic[i][::-1])
-        if runic[i][::-1] in line:
-            # print(runic[i][::-1])
-            found += runic[i][::-1]
+        # print(runic[i][::-1])
+
     # print(found)
     break
 
@@ -31,4 +33,6 @@ for line in text:
     # t += len(set(found))
     
 # print(t)
+
+
 
