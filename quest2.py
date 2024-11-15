@@ -10,29 +10,31 @@ for i in range(0, len(runic)):
 
 
 
-f = (open('test.txt').read().split('\n'))
-runic = f[0].replace('WORDS:', '').split(',')
+# Part 2
+# returns sum of runic symbols
+def occurences(string, substrings):
+    found = []
+    for substring in substrings:
+        pos = 0
+        while pos <= len(string) - len(substring):
+            if string[pos:pos+len(substring)] == substring:
+                found.extend(range(pos, pos+len(substring)))
+            pos += 1
+
+    return len(set(found))
+
+def addReversedStrings(list):
+    for word in list:
+        if word[::-1] not in list:
+            list.append(word[::-1])
+    return list
+
+f = (open('notes2-2.txt').read().split('\n'))
 text = f[2:]
+runic = f[0].replace('WORDS:', '').split(',')
+runic = addReversedStrings(runic)
+
 t = 0
-
-for word in runic:
-    if word[::-1] not in runic:
-        runic.append(word[::-1])
-
-for line in text:
-    found = ''
-    for i in range(0, len(runic)):
-        if runic[i] in line:
-            found += (runic[i])
-        # print(runic[i][::-1])
-
-    # print(found)
-    break
-
-
-    # t += len(set(found))
-    
-# print(t)
-
-
-
+for phrase in text:
+    t += occurences(phrase, runic)
+print(t)

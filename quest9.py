@@ -18,33 +18,24 @@ for sparkball in brightnessLevels:
 print(t)
 
 
+
 # Part 2 
-brightnessLevels = list(map(int, open('notes9-2.txt').read().split('\n')))
-
-dp = [float('inf')] * (1493 + 1)
-dp[0] = 0
-
-def min_beetles_for_brightness(brightness, stamps):
-    # Initialize dp array with a large number, representing infinity
+# minimum number of beetles for a certain brightness
+def minBeetles(brightness):
     dp = [float('inf')] * (brightness + 1)
-    dp[0] = 0  # 0 brightness requires 0 stamps
-    
-    # Dynamic programming to calculate minimum stamps for each brightness up to the target
+    dp[0] = 0
+
     for i in range(1, brightness + 1):
         for stamp in stamps:
             if i - stamp >= 0:
                 dp[i] = min(dp[i], dp[i - stamp] + 1)
-    
+
     return dp[brightness]
 
-def total_min_beetles(brightness_list, stamps):
-    total_beetles = 0
-    for brightness in brightness_list:
-        total_beetles += min_beetles_for_brightness(brightness, stamps)
-    return total_beetles
+stamps = [30, 25, 24, 20, 16, 15, 10, 5, 3, 1]
+brightnessLevels = list(map(int, open('notes9-2.txt').read().split('\n')))
+t = 0
 
-# Example usage
-brightness_list = list(map(int, open('notes9-2.txt').read().split('\n')))
-stamps = [30, 24, 20, 16, 15, 10, 5, 3, 1]
-result = total_min_beetles(brightness_list, stamps)
-print(result)  # Output the total number of beetles required
+for brightness in brightnessLevels:
+    t += minBeetles(brightness)
+print(t)
