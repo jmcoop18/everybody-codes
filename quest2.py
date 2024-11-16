@@ -1,4 +1,4 @@
-f = (open('notes2-1.txt').read().split('\n\n'))
+f = open('notes2-1.txt').read().split('\n\n')
 runic = f[0].replace('WORDS:', '').split(',')
 text = f[1]
 t = 0
@@ -29,7 +29,7 @@ def addReversedStrings(list):
             list.append(word[::-1])
     return list
 
-f = (open('notes2-2.txt').read().split('\n'))
+f = open('notes2-2.txt').read().split('\n')
 text = f[2:]
 runic = f[0].replace('WORDS:', '').split(',')
 runic = addReversedStrings(runic)
