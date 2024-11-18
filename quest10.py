@@ -25,7 +25,6 @@ print(runicWord(grid1))
 
 
 # Part 2
-# parsing data 
 og = open('notes10-2.txt').read().split('\n\n')
 shrines = []
 for k in range(7):
