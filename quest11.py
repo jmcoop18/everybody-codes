@@ -1,8 +1,6 @@
 f0 = open('test.txt').read().split('\n')
 f1 = open('notes11-1.txt').read().split('\n')
 f2 = open('notes11-2.txt').read().split('\n')
-f3 = open('notes11-3.txt').read().split('\n')
-
 
 def createDic(list):                               
     d = {}
@@ -26,9 +24,20 @@ dic = createDic(f2)
 print(newGen('Z', 10))
 
 
-dic = createDic(f3)
-res = []
-starts = []
-# for start in dic:
-#     res.append(newGen([start], 20))
-# print(newGen(['PGG'], 20))
+
+# ------------- Part 3 ------------- # 
+from collections import defaultdict
+f3 = open('notes11-3.txt').read().strip().split('\n')
+
+rules = createDic(f3)
+byType = {}
+for ky in rules.keys():
+    have = {ky: 1}
+    for _ in range(20):
+        newHave = defaultdict(int)
+        for k,v in have.items():
+            for x in rules[k]:
+                newHave[x] += v
+        have = newHave
+    byType[ky] = sum(have.values())
+print(max(byType.values()) - min(byType.values()))
