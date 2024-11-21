@@ -1,9 +1,37 @@
 f = open('notes12-1.txt').read().split('\n')
-
+f = open('test.txt').read().split('\n')
 def getTargets(lines):
     tgts = []
     srcs = []
-    mxR = len(lines) - 2
+    for r, ln in enumerate(lines):
+        for c, ch in enumerate(ln):
+            if ch in 'T':
+                tgts += [(r, c)]
+            if ch in 'ABC':
+                srcs += [(r, c)]
+    return tgts, srcs
+
+def getPower(tgt, src):
+    dr = tgt[0] - src[0] 
+    dc = tgt[1] - src[1]  
+
+    if dr == dc:
+        return int(dc) * (1 + src[1])
+
+    if dc - dr <= dr:
+        return int(dr) * (1 + src[1])
+
+    if (dr + dc) % 3 == 0:
+        return (dr + dc) // 3 * (1 + src[1])
+
+    return 0
+
+tgts, srcs = getTargets(f)
+tot = []
+for t in tgts:
+    for s in srcs:
+        tot.append(getPower(t,s))
+print(sum(tot))
 
 
 
