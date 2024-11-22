@@ -11,8 +11,6 @@ def getTargets(lines):
 
 
 
-
-
 def get_targets(lines):
     tgts = []
     srcs = []
